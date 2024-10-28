@@ -33,5 +33,8 @@ boxes.forEach((box) => {
 });
 
 resetbtn.addEventListener("click", () => {
+    boxes.forEach((box) => {
+        box.textContent = "";
+        });
     
 })
