@@ -58,10 +58,7 @@ const checkForWin = () => {
                 gameOver = true;
             }
         }
-        if(gameOver){
-             
-            
-        }
+        
     }
 }
 
@@ -90,10 +87,13 @@ boxes.forEach((box) => {
             count++;
         }
         if (count === 9) {
-            alert("It's a tie!");
-            gameOver = true;
-            msg.textContent = `It's a tie!`;
-            msgContainer.classList.remove("hide");
+            checkForWin();
+            if (!gameOver) {
+                alert("It's a tie!");
+                gameOver = true;
+                msg.textContent = `It's a tie!`;
+                msgContainer.classList.remove("hide");
+            }
 
         }
     });
