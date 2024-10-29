@@ -109,7 +109,7 @@ resetbtn.addEventListener("click", () => {
     count = 0;
     turn = playerX;
     gameOver = false;
-    
+    msgContainer.classList.add("hide");
 });
 
 newGamebtn.addEventListener("click", () =>{
