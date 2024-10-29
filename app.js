@@ -9,7 +9,7 @@ let playerX = "X";
 let playerO = "O";
 let turn = playerX;
 let turnO = true;
-
+let count = 0;
 let gameOver = false;
 
 const winPatterns = [
@@ -87,10 +87,16 @@ boxes.forEach((box) => {
             box.disabled = true;
             checkForWin();
             turn = turn === playerX ? playerO : playerX;   
+            count++;
         }
+        if (count === 9) {
+            alert("It's a tie!");
+            gameOver = true;
+            msg.textContent = `It's a tie!`;
+            msgContainer.classList.remove("hide");
 
-
-        });
+        }
+    });
 });
 
 
@@ -100,7 +106,7 @@ resetbtn.addEventListener("click", () => {
         // turnO = true;
         box.disabled = false;
     });
-    
+    count = 0;
     turn = playerX;
     gameOver = false;
     
@@ -114,5 +120,6 @@ newGamebtn.addEventListener("click", () =>{
     });
     turn = playerX;
     gameOver = false;
+    count = 0;
     msgContainer.classList.add("hide");
 })
