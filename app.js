@@ -2,7 +2,7 @@ let boxes = document.querySelectorAll(".box");
 let resetbtn = document.querySelector("#reset-btn"); 
 let newGamebtn = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-container");
-let msg = document.querySelector(".msg");
+let msg = document.querySelector("#msg");
 
 // We will have 2 player: playerX, playerO
 let playerX = "X";
@@ -23,10 +23,22 @@ const winPatterns = [
     [2, 4, 6],
 ]
 
-const showWinner = (winner) => {
-    msg.innerText = `Congratulations🎉🎊, Player ${winner} wins!`;
-    msgContainer.classList.remove("hide");
+const disabledBoxes = () => {
+    for (let box of boxes) {
+        box.disabled = true;
+    }
 }
+
+
+// Function to check if a player has won
+const showWinner = (winner) => {
+    console.log(`winner is ${winner}`)
+    msg.textContent = `Congratulations🎉🎊, Player ${winner} wins!`;
+    msgContainer.classList.remove("hide");
+    disabledBoxes();
+};
+
+
 
 const checkForWin = () => {
     for (pattern of winPatterns) {
@@ -37,11 +49,11 @@ const checkForWin = () => {
         if (pos1val != "" && pos2val != "" && pos3val != ""){
             if (pos1val === pos2val && pos2val === pos3val){
                 if (pos1val === playerX) {
-                    alert("Player X wins!");
-                    showWinner(playerX);
+                    // alert("Player X wins!");
+                    showWinner(pos1val);
                 } else if (pos1val === playerO) {
-                    alert("Player O wins!");
-                    showWinner(playerO)
+                    // alert("Player O wins!");
+                    showWinner(pos1val)
                 }
                 gameOver = true;
             }
@@ -86,9 +98,21 @@ resetbtn.addEventListener("click", () => {
     boxes.forEach((box) => {
         box.textContent = "";
         // turnO = true;
-        turn = playerX;
         box.disabled = false;
-        gameOver = false;
-        });
+    });
     
+    turn = playerX;
+    gameOver = false;
+    
+});
+
+newGamebtn.addEventListener("click", () =>{
+    boxes.forEach((box) => {
+        box.textContent = "";
+        // turnO = true;
+        box.disabled = false;
+    });
+    turn = playerX;
+    gameOver = false;
+    msgContainer.classList.add("hide");
 })
